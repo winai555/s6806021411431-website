@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winai Cozy Café Portfolio ☕🐾</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kodchasan', sans-serif;
+            background: linear-gradient(135deg, #fef8f0 0%, #e8dcc8 100%);
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        /* Cover Page */
+        .cover {
+            background: linear-gradient(135deg, #d4a574 0%, #b8956a 50%, #a8c5dd 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '☕';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            top: 10%;
+            right: 15%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '🐾';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: 15%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite 1s;
+        }
+
+        .cover-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cover-title {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cover-subtitle {
+            font-size: 1.8rem;
+            color: #fef8f0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .doodle {
+            position: absolute;
+            opacity: 0.7;
+        }
+
+        .cat-1 { top: 20%; left: 10%; font-size: 60px; animation: wiggle 3s ease-in-out infinite; }
+        .cat-2 { bottom: 25%; right: 12%; font-size: 50px; animation: wiggle 4s ease-in-out infinite 1s; }
+        .coffee-1 { top: 30%; right: 20%; font-size: 45px; animation: rotate 8s linear infinite; }
+        .pastry-1 { bottom: 35%; left: 15%; font-size: 40px; animation: bounce 3s ease-in-out infinite; }
+
+        /* Content Pages */
+        .content-page {
+            background: linear-gradient(135deg, #fef8f0 0%, #f5e9d8 100%);
+        }
+
+        .content-box {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            border: 3px solid #d4a574;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #8b6f47;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '☕';
+            position: absolute;
+            right: 20px;
+            top: 0;
+            font-size: 2rem;
+        }
+
+        .section-title::before {
+            content: '🐾';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            font-size: 2rem;
+        }
+
+        .text-content {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #5a4a3a;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid #d4a574;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: #8b6f47;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #6a5a4a;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d4a574;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #8b6f47;
+            transform: scale(1.5);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .emoji-deco {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2.5rem;
+            }
+            .cover-subtitle {
+                font-size: 1.2rem;
+            }
+            .content-box {
+                padding: 30px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .text-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Cover -->
+    <div class="page cover" id="page-1">
+        <div class="doodle cat-1">🐱</div>
+        <div class="doodle cat-2">😺</div>
+        <div class="doodle coffee-1">☕</div>
+        <div class="doodle pastry-1">🧁</div>
+        <div class="cover-content">
+            <h1 class="cover-title">Winai<br>Cozy Café Portfolio</h1>
+            <p class="cover-subtitle">☕🐾</p>
+        </div>
+    </div>
+
+    <!-- Page 2: About Me -->
+    <div class="page content-page" id="page-2">
+        <div class="content-box">
+            <h2 class="section-title">About Me</h2>
+            <div class="text-content">
+                <p>สวัสดีครับ ผม <span class="highlight">วินัย</span> <span class="emoji-deco">👋</span></p>
+                <p>เป็นคนที่ชอบบรรยากาศอบอุ่น ๆ แบบนั่งในคาเฟ่ มีเพลง R&B/Soul เบา ๆ กลิ่นกาแฟหอม ๆ และมีแมวน้อยเดินผ่านไปมา <span class="emoji-deco">☕🐾</span></p>
+                <p>ผมชอบสิ่งเล็ก ๆ น้อย ๆ ที่ทำให้รู้สึกผ่อนคลาย ไม่ว่าจะเป็นขนมอร่อย ๆ เพลงดี ๆ หรือแค่บรรยากาศที่ทำให้รู้สึกเหมือนอยู่บ้าน <span class="emoji-deco">🏠✨</span></p>
+                <p>แรงบันดาลใจของผมมาจากศิลปินที่ผมชอบ อย่าง <span class="highlight">Haerin, Jisoo, Yuna</span> — พวกเธอทำให้ผมรู้สึกว่าการเป็นตัวเองนั้นสวยงามที่สุด <span class="emoji-deco">💫</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: My Journey -->
+    <div class="page content-page" id="page-3">
+        <div class="content-box">
+            <h2 class="section-title">My Journey</h2>
+            <div class="text-content">
+                <p>ผมเป็นคนที่ชอบลองสิ่งใหม่ ๆ แม้จะเป็นแค่เรื่องเล็ก ๆ <span class="emoji-deco">🌱</span></p>
+                <p>บางครั้งก็ลองทำขนม (แม้จะไม่ค่อยสำเร็จก็เถอะ 😅) บางครั้งก็นั่งฟังเพลงทั้งวัน หรือไปหาคาเฟ่ใหม่ ๆ ที่มีมุมสวย ๆ</p>
+                <p>ผมใช้เวลาว่างกับการหาแรงบันดาลใจจากสิ่งรอบตัว — ไม่ว่าจะเป็นแมวน้อยที่เดินผ่านหน้าบ้าน <span class="emoji-deco">😸</span> หรือแก้วกาแฟที่ร้านคุ้นเคย <span class="emoji-deco">☕</span></p>
+                <p>ทุกวันมีเรื่องเล็ก ๆ ให้เรียนรู้ และผมชอบที่จะเก็บความรู้สึกดี ๆ เหล่านี้ไว้ <span class="emoji-deco">📔✨</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Activities -->
+    <div class="page content-page" id="page-4">
+        <div class="content-box">
+            <h2 class="section-title">Activities</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">🎵 Music Vibes</div>
+                    <div class="card-text">สร้าง playlist เพลง R&B/Soul ที่ฟังแล้วรู้สึกผ่อนคลาย ชอบแชร์เพลงดี ๆ กับเพื่อน</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">☕ Café Hopping</div>
+                    <div class="card-text">ชอบไปหาคาเฟ่ใหม่ ๆ บันทึกบรรยากาศและเมนูที่ชอบ เก็บไว้เป็นไอเดีย</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🧁 Baking Attempts</div>
+                    <div class="card-text">พยายามทำขนมอยู่เรื่อย ๆ บางทีก็สำเร็จ บางทีก็เป็นบทเรียน 😅</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">😺 Cat Lover</div>
+                    <div class="card-text">รักแมวมาก ๆ ชอบเล่นกับแมว ถ่ายรูปแมว และฝันว่าสักวันจะมีคาเฟ่แมว</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">📸 Aesthetic Hunter</div>
+                    <div class="card-text">ชอบถ่ายรูปสิ่งเล็ก ๆ น้อย ๆ ที่สวยงาม เก็บไว้เป็นความทรงจำ</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">💭 Daydreaming</div>
+                    <div class="card-text">วาดฝันเกี่ยวกับร้านขนมในฝัน ร้านกาแฟเล็ก ๆ ที่อบอุ่น</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 5: Inspirations -->
+    <div class="page content-page" id="page-5">
+        <div class="content-box">
+            <h2 class="section-title">Inspirations</h2>
+            <div class="text-content">
+                <p><span class="highlight">🎵 Music:</span> เพลง R&B/Soul ที่ทำให้รู้สึกสงบและมีพลัง ฟังแล้วเหมือนได้กอดจากเสียงเพลง</p>
+                <p><span class="highlight">✨ Artists:</span> Haerin, Jisoo, Yuna — พวกเธอสอนให้ผมเห็นว่าความเป็นธรรมชาติและความมั่นใจคือสิ่งที่สวยงามที่สุด</p>
+                <p><span class="highlight">☕ Cafés:</span> ทุกคาเฟ่ที่ผมไป ไม่ได้เป็นแค่ที่นั่งดื่มกาแฟ แต่เป็นพื้นที่ที่ทำให้จินตนาการบิน</p>
+                <p><span class="highlight">😺 Cats:</span> แมวสอนให้ผมเห็นความสงบและความเป็นตัวของตัวเอง พวกมันมีความสุขกับสิ่งเล็ก ๆ น้อย ๆ</p>
+                <p><span class="highlight">🧁 Baking:</span> ขนมแต่ละชิ้นเต็มไปด้วยความรัก ความพยายาม และความหวาน (แบบทั้งรสชาติและอารมณ์)</p>
+                <p><span class="highlight">💛 People:</span> คนรอบตัวที่ให้กำลังใจ ยอมรับในตัวตน และทำให้รู้สึกอบอุ่นเสมอ</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 6: Dreams -->
+    <div class="page content-page" id="page-6">
+        <div class="content-box">
+            <h2 class="section-title">Dreams</h2>
+            <div class="text-content">
+                <p>ความฝันของผมคือ... <span class="emoji-deco">✨</span></p>
+                <p><span class="highlight">สักวันหนึ่งผมอยากเปิดร้านขนม & คาเฟ่เล็ก ๆ ของตัวเอง</span></p>
+                <p>ร้านที่มีกลิ่นขนมอบอุ่น ๆ ตอนเช้า <span class="emoji-deco">🧁</span> เสียงเพลง R&B เบา ๆ ดังอยู่เบื้องหลัง <span class="emoji-deco">🎵</span></p>
+                <p>มีโต๊ะไม้เล็ก ๆ แสงธรรมชาติส่องผ่านหน้าต่าง และอาจมีแมวน้อยนอนหลับอยู่มุมใดมุมหนึ่ง <span class="emoji-deco">😴🐾</span></p>
+                <p>ที่นั่น ผมอยากให้เป็นมากกว่าแค่ร้านกาแฟ — ผมอยากให้เป็น <span class="highlight">"บ้านที่สอง"</span> ที่ทุกคนรู้สึกอบอุ่น ผ่อนคลาย และเป็นตัวของตัวเองได้</p>
+                <p>ไม่ต้องรีบ ไม่ต้องเร่ง แค่มานั่ง... ดื่มกาแฟ กินขนม ฟังเพลง และหายใจ <span class="emoji-deco">☕💭</span></p>
+                <p style="text-align: center; margin-top: 30px; font-size: 1.3rem; color: #8b6f47;">
+                    <span class="highlight">นี่คือความฝันเล็ก ๆ แต่มันคือความฝันของผม</span> <span class="emoji-deco">🌟</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="nav-dot active" onclick="goToPage(1)"></div>
+        <div class="nav-dot" onclick="goToPage(2)"></div>
+        <div class="nav-dot" onclick="goToPage(3)"></div>
+        <div class="nav-dot" onclick="goToPage(4)"></div>
+        <div class="nav-dot" onclick="goToPage(5)"></div>
+        <div class="nav-dot" onclick="goToPage(6)"></div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 6;
+
+        function goToPage(page) {
+            currentPage = page;
+            document.getElementById(`page-${page}`).scrollIntoView({ behavior: 'smooth' });
+            updateNav();
+        }
+
+        function updateNav() {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === currentPage);
+            });
+        }
+
+        // Detect scroll and update navigation
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const pages = document.querySelectorAll('.page');
+                let closest = 1;
+                let minDist = Infinity;
+                
+                pages.forEach((page, index) => {
+                    const rect = page.getBoundingClientRect();
+                    const dist = Math.abs(rect.top);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closest = index + 1;
+                    }
+                });
+                
+                if (closest !== currentPage) {
+                    currentPage = closest;
+                    updateNav();
+                }
+            }, 100);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                if (currentPage < totalPages) goToPage(currentPage + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                if (currentPage > 1) goToPage(currentPage - 1);
+            }
+        });
+    </script>
+</body>
+</html>
